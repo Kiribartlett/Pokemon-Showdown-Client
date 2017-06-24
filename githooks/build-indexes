@@ -375,19 +375,19 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				return ["Uber", "OU", "BL", "UU", "BL2", "NU", "NFE", "LC Uber", "LC"];
 			}
 			if (gen === 'gen4') {
-				return ["CAP", "Uber", "OU", "BL", "UU", "BL2", "NU", "NFE", "LC Uber", "LC"];
+				return ["CAP", "Uber", "OU", "BL", "UU", "BL2", "NU", "NFE", "LC Uber", "LC", "Unused"];
 			}
 			if (gen === 'gen5') {
-				return ["CAP", "Uber", "OU", "BL", "UU", "BL2", "RU", "BL3", "NU", "NFE", "LC Uber", "LC"];
+				return ["CAP", "Uber", "OU", "BL", "UU", "BL2", "RU", "BL3", "NU", "NFE", "LC Uber", "LC", "Unused"];
 			}
 			if (gen === 'gen7') {
-				return ["CAP", "Uber", "OU", "BL", "(OU)", "UU", "BL2", "RU", "BL3", "NU", "BL4", "PU", "New", "Unreleased", "NFE", "LC Uber", "LC"];
+				return ["CAP", "Uber", "OU", "BL", "(OU)", "UU", "BL2", "RU", "BL3", "NU", "BL4", "PU", "New", "Unreleased", "NFE", "LC Uber", "LC", "Unused"];
 			}
-			return ["CAP", "Uber", "OU", "BL", "(OU)", "UU", "BL2", "RU", "BL3", "NU", "BL4", "PU", "NFE", "LC Uber", "LC"];
+			return ["CAP", "Uber", "OU", "BL", "(OU)", "UU", "BL2", "RU", "BL3", "NU", "BL4", "PU", "NFE", "LC Uber", "LC", "Unused"];
 		})();
 
 		for (const tier of tierOrder) {
-			if (tier in {OU:1, Uber:1, UU:1, RU:1, NU:1, PU:1, LC:1, DOU:1, DUU:1, DNU:1, "(PU)":1, New:1, Legal:1}) {
+			if (tier in {OU:1, Uber:1, UU:1, RU:1, NU:1, PU:1, LC:1, Unused:1, DOU:1, DUU:1, DNU:1, "(PU)":1, New:1, Legal:1}) {
 				formatSlices[tier === "(PU)" ? "FU" : tier] = tiers.length;
 			}
 			if (!tierTable[tier]) continue;
@@ -397,6 +397,8 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				tiers.push(['header', tier.slice(1, -1) + " by technicality"]);
 			} else if (tier === "NFE") {
 				tiers.push(['header', "NFEs not in a higher tier"]);
+			} else if (tier === "Unused") {
+				tiers.push(['header', "Unused Pokemon not in a higher tier"]);
 			} else {
 				tiers.push(['header', tier]);
 			}
